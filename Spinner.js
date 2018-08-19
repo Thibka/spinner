@@ -26,17 +26,17 @@
 
     Spinner.prototype.spin = function() {
         this.startTime = getTime();
-        this.spinAnimation();
+        this._spinAnimation();
     }
 
-    Spinner.prototype.spinAnimation = function() {             
+    Spinner.prototype._spinAnimation = function() {             
         this.clock = getTime() - this.startTime;
         
         currentRotation = this.easing(this.clock, this.start, this.diff, this.duration);
         this.element.style.webkitTransform = this.element.style.transform = "rotate3d(" + this.axis + "," + currentRotation + "deg)";
         
         console.log("rotate3d(" + this.axis + "," + currentRotation + "deg)");
-        if (this.clock < this.duration) requestAnimationFrame(this.spinAnimation.bind(this));
+        if (this.clock < this.duration) requestAnimationFrame(this._spinAnimation.bind(this));
         else {
             this.element.style["-webkit-transform"] = "rotate3d(" + this.axis + "," + this.end + "deg)";
             this.element.style.transform = "rotate3d(" + this.axis + "," + this.end + "deg)";
